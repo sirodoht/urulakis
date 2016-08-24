@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  .container
+    .row
+      .col-md-12
+        .jumbotron
+          h1 urulakis
+          p.lead URL shortener
+    .row
+      .col-lg-6.col-lg-offset-3.col-md-6.col-md-offset-3.col-sm-6.col-sm-offset-3.col-xs-12
+        .new
+          form(method="POST", action="/new")
+            .form-group
+              label(for="url") Long URL
+              input#url.form-control(name="url", autofocus)
+            .btn-center-wrapper
+              button.btn.btn-default(type="submit") Submit
