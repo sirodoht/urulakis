@@ -1,0 +1,48 @@
+{
+  "name": "urulakis",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "npm run watchify & npm run sasswatch & nodemon ./back/app.js",
+    "test": "eslint ./back/app.js && eslint ./front/scripts/app.js && export NODE_CONFIG_DIR='../config' && ava",
+    "browserify": "browserify front/scripts/app.js -o front/static/script.js",
+    "watchify": "watchify front/scripts/app.js -v --poll 100ms -o ./front/static/script.js",
+    "sass": "node-sass --include-path scss ./front/styles/boot.scss ./front/static/style.css",
+    "sasswatch": "nodemon -e scss -x \"npm run sass\"",
+    "build": "npm run browserify && npm run sass",
+    "deploy": "npm run build && node ./back/app.js"
+  },
+  "engines": {
+    "node": "6.x",
+    "npm": "3.x"
+  },
+  "dependencies": {
+    "bluebird": "3.4.1",
+    "body-parser": "1.15.2",
+    "browserify": "13.1.0",
+    "config": "1.21.0",
+    "cookie-parser": "1.4.3",
+    "debug": "2.2.0",
+    "express": "4.14.0",
+    "morgan": "1.7.0",
+    "node-sass": "3.8.0",
+    "pug": "2.0.0-beta5",
+    "redis": "2.6.2",
+    "serve-favicon": "2.3.0",
+    "uid-safe": "2.1.2"
+  },
+  "devDependencies": {
+    "ava": "0.16.0",
+    "chai": "3.5.0",
+    "eslint": "3.3.1",
+    "nodemon": "1.10.2",
+    "request": "2.74.0"
+  },
+  "ava": {
+    "files": [
+      "test/*.js"
+    ],
+    "concurrency": 5,
+    "failFast": true
+  }
+}
